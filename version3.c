@@ -224,11 +224,11 @@ void roading_cpu(){
             list_for_each(pos, &waiting_queue){
                 process *tmp = list_entry(pos, process, list);
                 if(p->pid <= tmp->pid){
-                    list_add_tail(&p->list, pos);
+                    list_move_tail(&p->list, pos);
                     find = 1; break;
                 }
             }
-            if(!find) list_add_tail(&p->list, &waiting_queue);
+            if(!find) list_move_tail(&p->list, &waiting_queue);
         }
         else{
             int id = (cpu[0].ready_q_cnt <= cpu[1].ready_q_cnt ? 0 : 1);
